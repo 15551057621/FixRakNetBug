@@ -24,7 +24,7 @@ private:
     ll::mod::NativeMod& mSelf;
 };
 
-} // namespace fix_raknet_bug
+} // namespace fix_raknet_bug 
 
 /*
 

@@ -48,7 +48,7 @@ bool FixRakNetBug::load() {
 
 bool FixRakNetBug::enable() {
     getSelf().getLogger().info("FixRakNetBug 已启用，RakNet 崩溃修复已激活");
-    registerHooks();  // 激活 Hook
+    registerHooks();  // 激活 Hook 
     return true;
 }
 
