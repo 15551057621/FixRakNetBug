@@ -25,9 +25,10 @@ LL_STATIC_HOOK(
 ) {
     // 检查是否是 0x86 包且长度不足（会导致崩溃）
     if (static_cast<unsigned char>(data[0]) == 0x86 && 
-        length < sizeof(unsigned char) + sizeof(RakNet::SystemAddress)) {
+        length < sizeof(unsigned char) + sizeof(RakNet::SystemAddress)
+    ) {
         if (g_logger) {
-            g_logger->info("收到不合规的数据包，已拦截");  // ✅ 用全局指针
+            g_logger->warn("收到不合规的数据包，已拦截...");  // ✅ 用全局指针
         }
         return false;  // 丢弃这个包，不处理
     }
@@ -47,18 +48,22 @@ FixRakNetBug& FixRakNetBug::getInstance() {
 
 bool FixRakNetBug::load() {
     g_logger = &getSelf().getLogger();  // ← 保存 Logger 指针
-    getSelf().getLogger().info("FixRakNetBug 加载中...");
+    g_logger->warn("开始加载...");
     return true;
 }
 
 bool FixRakNetBug::enable() {
-    getSelf().getLogger().info("FixRakNetBug 已启用，RakNet 崩溃修复已激活");
     registerHooks();  // 激活 Hook 
     return true;
 }
 
 bool FixRakNetBug::disable() {
-    getSelf().getLogger().info("FixRakNetBug 已禁用");
+    RakNetHook::unhook(); // 卸载 Hook
+    return true;
+}
+
+bool FixRakNetBug::unload() {
+    g_logger = nullptr;
     RakNetHook::unhook(); // 卸载 Hook
     return true;
 }

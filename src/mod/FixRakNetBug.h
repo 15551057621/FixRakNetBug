@@ -19,6 +19,7 @@ public:
     bool load();
     bool enable();
     bool disable();
+    bool unload();
 
 private:
     ll::mod::NativeMod& mSelf;
