@@ -6,6 +6,9 @@
 
 namespace fix_raknet_bug {
 
+// 全局 Logger 指针（在 load 时初始化）
+static ll::io::Logger* g_logger = nullptr;
+
 // 修复 MCPE-228407: 处理 ID_PONG_ADDRESS_INFO (0x86) 包的缓冲区溢出问题
 LL_STATIC_HOOK(
     RakNetHook,
@@ -23,6 +26,9 @@ LL_STATIC_HOOK(
     // 检查是否是 0x86 包且长度不足（会导致崩溃）
     if (static_cast<unsigned char>(data[0]) == 0x86 && 
         length < sizeof(unsigned char) + sizeof(RakNet::SystemAddress)) {
+        if (g_logger) {
+            g_logger->info("收到不合规的数据包，已拦截");  // ✅ 用全局指针
+        }
         return false;  // 丢弃这个包，不处理
     }
     return origin(systemAddress, data, length, rakPeer, rakNetSocket, isOfflineMessage, timeRead);
@@ -40,6 +46,7 @@ FixRakNetBug& FixRakNetBug::getInstance() {
 }
 
 bool FixRakNetBug::load() {
+    g_logger = &getSelf().getLogger();  // ← 保存 Logger 指针
     getSelf().getLogger().info("FixRakNetBug 加载中...");
     return true;
 }
@@ -52,7 +59,7 @@ bool FixRakNetBug::enable() {
 
 bool FixRakNetBug::disable() {
     getSelf().getLogger().info("FixRakNetBug 已禁用");
-    // Hook 会自动清理，不需要手动处理
+    RakNetHook::unhook(); // 卸载 Hook
     return true;
 }
 
