@@ -30,7 +30,7 @@ LL_STATIC_HOOK(
 
 // 注册 Hook
 void registerHooks() {
-    static memory::HookRegistrar<RakNetHook> registrar;
+    static ll::memory::HookRegistrar<RakNetHook> registrar;
 }
 
 // 插件实现
