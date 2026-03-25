@@ -2,8 +2,6 @@
 #include "ll/api/mod/RegisterHelper.h"
 #include "ll/api/memory/Hook.h"
 #include "mc/deps/raknet/RakNet.h"
-#include "mc/deps/raknet/RakPeer.h"
-#include "mc/deps/raknet/RakNetSocket.h"
 #include "mc/deps/raknet/SystemAddress.h"
 
 namespace fix_raknet_bug {
