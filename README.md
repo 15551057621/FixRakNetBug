@@ -1,5 +1,6 @@
-本项目基于 GNU Lesser General Public License v3.0 (LGPL-3.0) 协议开源
-https://github.com/LiteLDev/LeviLamina/commit/78c32a942067c3a394ba4dadc3a4288a57fd2547
+本项目基于 GNU Lesser General Public License v3.0 (LGPL-3.0) 协议开源，修改自 LeviLamina 官方代码。
+原代码版权归 LiteLDev 所有。
+源插件地址： https://github.com/LiteLDev/LeviLamina/commit/78c32a942067c3a394ba4dadc3a4288a57fd2547
 
 --
 
