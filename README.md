@@ -1,5 +1,7 @@
-本项目基于 LGPL-3.0 协议开源，修改自 LeviLamina 官方代码：
+本项目基于 GNU Lesser General Public License v3.0 (LGPL-3.0) 协议开源
 https://github.com/LiteLDev/LeviLamina/commit/78c32a942067c3a394ba4dadc3a4288a57fd2547
+
+--
 
 适用于ll 1.4.3的远程崩溃修复  
 修复代码来源于新版ll  
